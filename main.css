@@ -1,0 +1,23 @@
+body {
+  margin: 20px;
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+ul {
+  margin: 2em 0;
+  padding: 0;
+  list-style: none;
+}
+
+li {
+  padding: 0.5em 1em;
+}
+
+li:nth-child(2n + 1) {
+  background: #f3f3f3;
+}
+
+li.next-event {
+  background: #ffc7bc;
+  font-weight: bold;
+}
