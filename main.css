@@ -1,16 +1,17 @@
 body {
   margin: 0;
-  padding: 0;
+  padding: 2em;
   font-family: Helvetica, Arial, sans-serif;
+  color: #333;
 }
 
 .wrapper {
-  margin: 2em auto;
-  width: 90%;
+  margin: 0 auto;
   max-width: 999px;
 }
 
 h1 {
+  margin-top: 0;
   font-size: 1.8em;
 }
 @media (max-width: 600px) {
@@ -41,8 +42,8 @@ li a {
   opacity: 0;
   transition: 0.3s;
   outline: none;
-  margin-left: -1.8em;
-  padding-right: 1.3em;
+  margin-left: -2.5em;
+  padding: 0.5em 1.5em 0.5em 0.5em;
   font-weight: 600;
 }
 
@@ -54,8 +55,7 @@ li a:focus {
 li:after {
   counter-increment: index;
   content: counter(index);
-  color: #888;
-  opacity: 0;
+  opacity: 0.15;
   transition: 0.3s;
   float: right;
 }
