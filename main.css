@@ -42,3 +42,7 @@ li.next-event {
   background: #ffc7bc;
   font-weight: bold;
 }
+
+#disqus_thread {
+  margin-top: 3em;
+}
