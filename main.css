@@ -1,6 +1,27 @@
 body {
-  margin: 20px;
+  margin: 0;
+  padding: 0;
   font-family: Helvetica, Arial, sans-serif;
+}
+
+.wrapper {
+  margin: 2em auto;
+  width: 90%;
+  max-width: 999px;
+}
+
+h1 {
+  font-size: 1.8em;
+}
+@media (max-width: 600px) {
+  h1 {
+    font-size: 1.4em;
+  }
+}
+
+b {
+  font-size: 1.15em;
+  color: #c3260a;
 }
 
 ul {
