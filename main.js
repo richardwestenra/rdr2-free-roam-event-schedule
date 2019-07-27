@@ -19,7 +19,7 @@ var schedule = [
   ['09:00', 'Fishing Challenge'],
   ['09:45', 'Fool’s Gold'],
   ['10:30', 'Master Archer'],
-  ['11:15', 'Wild Animal Kills'],
+  ['11:15', 'Side Arm Kills'],
   ['12:00', 'King of the Castle'],
   ['12:45', 'Cold Dead Hands'],
   ['13:30', 'Dispatch Rider'],
