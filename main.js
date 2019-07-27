@@ -9,7 +9,7 @@ var eventFrequency = 45 * 60 * 1000;
 // Update the list of times, and the
 function updateList() {
   var timesList = document.createElement('ul');
-  schedule.forEach(function(t) {
+  schedule.forEach(function(t, i) {
     var event = calculateEventTimes(t);
     var li = document.createElement('li');
     if (event.eta > 0 && event.eta < eventFrequency) {
@@ -17,10 +17,19 @@ function updateList() {
       nextEventName.innerHTML = event.name;
       nextEventTime.innerHTML = event.timeString;
     }
-    li.innerText = event.timeString + ' - ' + event.name;
+    li.append(getAnchor(i + 1));
+    li.append(event.timeString + ' - ' + event.name);
     timesList.append(li);
   });
   times.innerHTML = timesList.outerHTML;
+}
+
+function getAnchor(index) {
+  var anchor = document.createElement('a');
+  anchor.setAttribute('id', index);
+  anchor.setAttribute('href', '#' + index);
+  anchor.innerText = '#';
+  return anchor;
 }
 
 // Convert between time-zones etc

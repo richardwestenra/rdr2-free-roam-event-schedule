@@ -28,10 +28,40 @@ ul {
   margin: 2em 0;
   padding: 0;
   list-style: none;
+  counter-reset: index;
 }
 
 li {
-  padding: 0.5em 1em;
+  padding: 0.5em 0.8em;
+}
+
+li a {
+  text-decoration: none;
+  color: #888;
+  opacity: 0;
+  transition: 0.3s;
+  outline: none;
+  margin-left: -1.8em;
+  padding-right: 1.3em;
+  font-weight: 600;
+}
+
+li:hover a,
+li a:focus {
+  opacity: 1;
+}
+
+li:after {
+  counter-increment: index;
+  content: counter(index);
+  color: #888;
+  opacity: 0;
+  transition: 0.3s;
+  float: right;
+}
+
+li:hover:after {
+  opacity: 1;
 }
 
 li:nth-child(2n + 1) {
