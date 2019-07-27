@@ -2,6 +2,7 @@
 // without transpilation (if still necessary?)
 
 var eventFrequency = 45 * 60 * 1000;
+var date = new Date();
 
 // Select DOM elements
 var times = document.getElementById('times');
@@ -49,12 +50,12 @@ function getAnchor(index) {
  */
 function calculateEventTimes(t) {
   var eventTime = t[0];
-  var currentDate = new Date().toDateString();
+  var currentDate = date.toDateString();
   var eventDateTime = new Date([currentDate, eventTime, 'UTC'].join(' '));
   return {
     dateTime: eventDateTime,
     name: t[1],
-    eta: eventDateTime - new Date(),
+    eta: eventDateTime - date,
     timeString: eventDateTime.toLocaleTimeString('default', {
       hour: '2-digit',
       minute: '2-digit'
@@ -63,18 +64,35 @@ function calculateEventTimes(t) {
 }
 
 /**
- * Update the user's time zone in intro paragraph
+ * Get the name or abbreviation for the user's time zone
+ * @return {string} e.g. GMT or Greenwich Mean Time or UTC+5
  */
-function showTimeZone() {
-  var timeZone = new Date()
-    .toUTCString()
-    .split(' ')
-    .pop();
-  var timeZoneOffset = new Date().getTimezoneOffset() / -60;
+function getTimezone() {
+  // Generate long time-zone name
+  var longTimeZone = date.toString().match(/\((.+)\)/);
+  if (longTimeZone) {
+    return longTimeZone[1];
+  }
+  // Fall back to short code if that one is null
+  var shortTimeZone = date
+    .toLocaleTimeString('en-us', { timeZoneName: 'short' })
+    .split(' ');
+  if (shortTimeZone) {
+    return shortTimeZone[2];
+  }
+  // Finally, fall back to time-zone offset
+  var timeZoneOffset = date.getTimezoneOffset() / -60;
   if (timeZoneOffset > 0) {
     timeZoneOffset = '+' + timeZoneOffset;
   }
-  locale.innerText = ' (' + timeZone + ' or UTC' + timeZoneOffset + ')';
+  return 'GMT' + timeZoneOffset;
+}
+
+/**
+ * Update the user's time zone in intro paragraph
+ */
+function showTimeZone() {
+  locale.innerText = ' (' + getTimezone() + ')';
 }
 
 // Initialise
