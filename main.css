@@ -5,6 +5,20 @@ body {
   color: #333;
 }
 
+a {
+  color: royalblue;
+}
+
+a:visited {
+  color: DARKBLUE;
+}
+
+a:hover,
+a:focus {
+  color: steelblue;
+  text-decoration: none;
+}
+
 .wrapper {
   margin: 0 auto;
   max-width: 999px;
