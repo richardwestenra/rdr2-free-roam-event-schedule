@@ -8,6 +8,7 @@ var date = new Date();
 var times = document.getElementById('times');
 var nextEventName = document.getElementById('next-event-name');
 var nextEventTime = document.getElementById('next-event-time');
+var nextEventEta = document.getElementById('next-event-eta');
 var locale = document.getElementById('locale');
 
 /**
@@ -22,6 +23,8 @@ function updateList() {
       li.classList.add('next-event');
       nextEventName.innerHTML = event.name;
       nextEventTime.innerHTML = event.timeString;
+      nextEventEta.innerHTML = event.etaText;
+      console.log(event);
     }
     li.append(getAnchor(i + 1));
     li.append(event.timeString + ' - ' + event.name);
@@ -52,15 +55,34 @@ function calculateEventTimes(t) {
   var eventTime = t[0];
   var currentDate = date.toDateString();
   var eventDateTime = new Date([currentDate, eventTime, 'UTC'].join(' '));
+  var eta = eventDateTime - date;
   return {
     dateTime: eventDateTime,
     name: t[1],
-    eta: eventDateTime - date,
+    eta: eta,
+    etaText: getEtaText(eta),
     timeString: eventDateTime.toLocaleTimeString('default', {
       hour: '2-digit',
       minute: '2-digit'
     })
   };
+}
+
+/**
+ * Display time remaining in minutes or seconds
+ * @param {number} t Time in milliseconds
+ * @return {string} e.g. 1 minute, 35 minutes, 1 second, 40 seconds, etc.
+ */
+function getEtaText(t) {
+  t = t / 1000; // convert to seconds
+  function s(t) {
+    return t === 1 ? '' : 's';
+  }
+  if (t < 60) {
+    return Math.round(t) + ' second' + s(t);
+  }
+  t = Math.round(t / 60); // convert to minutes
+  return t + ' minute' + s(t);
 }
 
 /**
@@ -99,8 +121,8 @@ function showTimeZone() {
 showTimeZone();
 updateList();
 
-// Update event list every 20 seconds
-window.setInterval(updateList, 20000);
+// Update event list every 10 seconds
+window.setInterval(updateList, 10000);
 
 // Initialise Disqus
 var disqus_shortname = 'richardwestenra';
