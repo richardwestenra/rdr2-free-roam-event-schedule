@@ -2,7 +2,6 @@
 // without transpilation (if still necessary?)
 
 var eventFrequency = 45 * 60 * 1000;
-var date = new Date();
 
 // Select DOM elements
 var times = document.getElementById('times');
@@ -24,7 +23,6 @@ function updateList() {
       nextEventName.innerHTML = event.name;
       nextEventTime.innerHTML = event.timeString;
       nextEventEta.innerHTML = event.etaText;
-      console.log(event);
     }
     li.append(getAnchor(i + 1));
     li.append(event.timeString + ' - ' + event.name);
@@ -52,6 +50,7 @@ function getAnchor(index) {
  * @return {Object} Formatted event datum
  */
 function calculateEventTimes(t) {
+  var date = new Date();
   var eventTime = t[0];
   var currentDate = date.toDateString();
   var eventDateTime = new Date([currentDate, eventTime, 'UTC'].join(' '));
@@ -90,6 +89,7 @@ function getEtaText(t) {
  * @return {string} e.g. GMT or Greenwich Mean Time or UTC+5
  */
 function getTimezone() {
+  var date = new Date();
   // Generate long time-zone name
   var longTimeZone = date.toString().match(/\((.+)\)/);
   if (longTimeZone) {
