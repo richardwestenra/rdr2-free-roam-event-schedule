@@ -59,7 +59,7 @@ function calculateEventTimes(t) {
     var tomorrow = new Date();
     tomorrow.setDate(now.getDate() + 1);
     eventDateTime = new Date([tomorrow.toDateString(), eventTime, 'UTC'].join(' '));
-    eta = eventDateTime - date;
+    eta = eventDateTime - now;
   }
   return {
     dateTime: eventDateTime,
