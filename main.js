@@ -50,11 +50,17 @@ function getAnchor(index) {
  * @return {Object} Formatted event datum
  */
 function calculateEventTimes(t) {
-  var date = new Date();
   var eventTime = t[0];
-  var currentDate = date.toDateString();
-  var eventDateTime = new Date([currentDate, eventTime, 'UTC'].join(' '));
-  var eta = eventDateTime - date;
+  var now = new Date();
+  var eventDateTime = new Date([now.toDateString(), eventTime, 'UTC'].join(' '));
+  var eta = eventDateTime - now;
+  // Ensure that all event dates are in the future, to fix timezone bug
+  if (eta <= 0) {
+    var tomorrow = new Date();
+    tomorrow.setDate(now.getDate() + 1);
+    eventDateTime = new Date([tomorrow.toDateString(), eventTime, 'UTC'].join(' '));
+    eta = eventDateTime - date;
+  }
   return {
     dateTime: eventDateTime,
     name: t[1],
