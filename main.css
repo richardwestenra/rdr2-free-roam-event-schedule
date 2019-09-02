@@ -1,22 +1,90 @@
 body {
   margin: 0;
-  padding: 2em;
+  padding: 3em 1.5em;
   font-family: Helvetica, Arial, sans-serif;
+}
+body.light {
+  background: #fafafa;
   color: #333;
 }
+body.dark {
+  background: #222;
+  color: #ddd;
+}
 
-a {
+.light a {
   color: royalblue;
 }
-
-a:visited {
-  color: DARKBLUE;
+.light a:visited {
+  color: darkblue;
 }
-
-a:hover,
-a:focus {
+.light a:hover,
+.light a:focus {
   color: steelblue;
   text-decoration: none;
+}
+.dark a {
+  color: cyan;
+}
+.dark a:visited {
+  color: lightcyan;
+}
+.dark a:hover,
+.dark a:focus {
+  color: turquoise;
+  text-decoration: none;
+}
+
+.theme-button {
+  position: absolute;
+  top: 0.5em;
+  right: 0.5em;
+  background: none;
+  padding: 0;
+  box-shadow: none;
+  border-radius: 0;
+  border: none;
+  color: inherit;
+  font-family: inherit;
+  font-size: inherit;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  opacity: 0.9;
+  outline: none;
+}
+.theme-button:hover,
+.theme-button:focus {
+  opacity: 1;
+}
+.theme-button span {
+  visibility: hidden;
+  opacity: 0;
+  transform: translateX(2em);
+  transition: 0.2s ease all;
+  font-size: 0.9em;
+}
+.theme-button:hover span,
+.theme-button:focus span {
+  visibility: visible;
+  opacity: 1;
+  transform: translateX(0);
+}
+.theme-button svg {
+  width: 2.4em;
+  height: auto;
+  transition: 0.2s ease all;
+}
+.light .theme-button svg {
+  fill: #111;
+}
+.dark .theme-button svg {
+  fill: #fff;
+}
+@media (max-width: 600px) {
+  .theme-button {
+    font-size: 0.85em;
+  }
 }
 
 .wrapper {
@@ -36,23 +104,28 @@ h1 {
 
 b {
   font-size: 1.15em;
+}
+.light b {
   color: #c3260a;
 }
+.dark b {
+  color: #f9775f;
+}
 
-ul {
+.times ul {
   margin: 2em 0;
   padding: 0;
   list-style: none;
   counter-reset: index;
 }
 
-li {
+.times li {
   padding: 0.5em 0.8em;
 }
 
-li a {
+.times a {
   text-decoration: none;
-  color: #888;
+  color: inherit;
   opacity: 0;
   transition: 0.3s;
   outline: none;
@@ -61,9 +134,9 @@ li a {
   font-weight: 600;
 }
 
-li:hover a,
-li a:focus {
-  opacity: 1;
+.times li:hover a,
+.times li a:focus {
+  opacity: 0.5;
 }
 
 li:after {
@@ -78,13 +151,21 @@ li:hover:after {
   opacity: 1;
 }
 
-li:nth-child(2n + 1) {
-  background: #f3f3f3;
+.light li:nth-child(2n + 1) {
+  background: rgba(0, 0, 0, 0.03);
+}
+.dark li:nth-child(2n + 1) {
+  background: rgba(255, 255, 255, 0.03);
 }
 
 li.next-event {
-  background: #ffc7bc;
   font-weight: bold;
+}
+.light li.next-event {
+  background: #ffc7bc;
+}
+.dark li.next-event {
+  background: #943928;
 }
 
 #disqus_thread {

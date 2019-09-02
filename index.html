@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -26,8 +26,8 @@
       });
     </script>
   </head>
-  <body>
-    <div class="wrapper">
+  <body class="dark">
+    <main class="wrapper">
       <h1>Red Dead Redemption 2 Free-Roam Event Schedule</h1>
       <p>
         The next event is <b id="next-event-name"></b> at
@@ -37,7 +37,11 @@
         All times are in your local time zone<span id="locale"></span>,
         according to your device's locale settings.
       </p>
-      <div id="times">
+      <button id="theme" class="theme-button" aria-label="Change theme">
+        <span>Change theme</span>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M50 19.8a30.2 30.2 0 1 0 0 60.5 30.2 30.2 0 0 0 0-60.5zM23.8 50A26.2 26.2 0 0 1 48 23.9v52.2A26.2 26.2 0 0 1 23.8 50z"/></svg>
+      </button>
+      <div id="times" class="times">
         <noscript>
           <p class="browsehappy">
             Please enable JavaScript to view the timetable
@@ -104,7 +108,8 @@
           </p>
         </noscript>
       </div>
-    </div>
+      <p><small><a href="https://thenounproject.com/term/contrast/765915">Contrast icon by Tawny Whatmore</a> from the <a href="https://thenounproject.com/">Noun Project</a></small></p>
+    </main>
     <script src="main.js"></script>
   </body>
 </html>
