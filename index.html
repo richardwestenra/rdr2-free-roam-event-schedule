@@ -3,11 +3,8 @@
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Red Dead Redemption 2 Free-Roam Event Schedule</title>
-    <meta
-      name="description"
-      content="Timetable of RDR2 free-roam events, customised to your local time-zone"
-    />
+    <title>Red Dead Redemption 2 Event Schedule</title>
+    <meta name="description" content="Timetable of RDR2 free-roam/role events, customised to your local time zone" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
     <script>
@@ -28,88 +25,94 @@
   </head>
   <body class="dark">
     <main class="wrapper">
-      <h1>Red Dead Redemption 2 Free-Roam Event Schedule</h1>
-      <p>
-        The next event is <b id="next-event-name"></b> at
-        <b id="next-event-time"></b> (in <span id="next-event-eta"></span>).
-      </p>
-      <p>
-        All times are in your local time zone<span id="locale"></span>,
-        according to your device's locale settings.
-      </p>
+      <h1>Red Dead Redemption Event Schedule</h1>
+      <p>The next <strong>Free-Roam Event</strong> is <b id="next-fr-event-name"></b> at
+        <b id="next-fr-event-time"></b> (in <span id="next-fr-event-eta"></span>). The next <strong>Role Event</strong> is <b id="next-role-event-name"></b> at
+        <b id="next-role-event-time"></b> (in <span id="next-role-event-eta"></span>).</p>
+      <p>All times are in your local time zone<span id="locale"></span>,
+        according to your device's locale settings.</p>
       <button id="theme" class="theme-button" aria-label="Change theme">
         <span>Change theme</span>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M50 19.8a30.2 30.2 0 1 0 0 60.5 30.2 30.2 0 0 0 0-60.5zM23.8 50A26.2 26.2 0 0 1 48 23.9v52.2A26.2 26.2 0 0 1 23.8 50z"/></svg>
       </button>
-      <div id="times" class="times">
-        <noscript>
-          <p class="browsehappy">
-            Please enable JavaScript to view the timetable
-          </p>
-        </noscript>
-        <script>
-          // Base times are in UTC/GMT, via https://www.reddit.com/r/RedDeadOnline/comments/c5wjmc/free_roam_events_schedule/es698ne/
-          var schedule = [
-            ['00:00', 'Master Archer'],
-            ['00:45', 'Railroad Baron'],
-            ['01:30', 'Wild Animal Kills'],
-            ['02:15', 'Fishing Challenge'],
-            ['03:00', 'Fool’s Gold'],
-            ['03:45', 'Master Archer'],
-            ['04:30', 'Lake Fishing Challenge'],
-            ['05:15', 'King of the Castle'],
-            ['06:00', 'Cold Dead Hands'],
-            ['06:45', 'Dispatch Rider'],
-            ['07:30', 'Railroad Baron'],
-            ['08:15', 'Wild Animal Kills'],
-            ['09:00', 'Fishing Challenge'],
-            ['09:45', 'Fool’s Gold'],
-            ['10:30', 'Master Archer'],
-            ['11:15', 'Long Arm Kills'],
-            ['12:00', 'King of the Castle'],
-            ['12:45', 'Cold Dead Hands'],
-            ['13:30', 'Dispatch Rider'],
-            ['14:15', 'Railroad Baron'],
-            ['15:00', 'Wild Animal Kills'],
-            ['15:45', 'Fishing Challenge'],
-            ['16:30', 'Fool’s Gold'],
-            ['17:15', 'Master Archer'],
-            ['18:00', 'Long Arm Kills'],
-            ['18:45', 'King of the Castle'],
-            ['19:30', 'Cold Dead Hands'],
-            ['20:15', 'Dispatch Rider'],
-            ['21:00', 'Railroad Baron'],
-            ['21:45', 'Wild Animal Kills'],
-            ['22:30', 'Fishing Challenge'],
-            ['23:15', 'Fool’s Gold']
-          ];
-        </script>
-      </div>
-      <p>
-        Built with ♥ for the RDR2 community by
-        <a href="http://richardwestenra.com">Richard Westenra</a>. Event data
-        from
-        <a
-          href="https://www.reddit.com/r/RedDeadOnline/comments/c5wjmc/free_roam_events_schedule/es698ne/"
-          >Reddit</a
-        >. Spotted any inaccurate data or bugs? Submit an issue/PR on
-        <a
-          href="https://github.com/richardwestenra/rdr2-free-roam-event-schedule"
-          >GitHub</a
-        >, or post a comment below.
-      </p>
+      <noscript>
+        <p class="browsehappy">Please enable JavaScript to view the timetable</p>
+      </noscript>
+      <section class="schedule-wrapper">
+        <section>
+          <h2>Free-roam schedule</h2>
+          <div id="free-roam-schedule" class="schedule"></div>
+        </section>
+        <section>
+          <h2>Role schedule</h2>
+          <div id="role-schedule" class="schedule"></div>
+        </section>
+      </section>
+      <p>Built with ♥ for the RDR2 community by <a href="http://richardwestenra.com">Richard Westenra</a>. Event data from <a href="https://www.reddit.com/r/RedDeadOnline/comments/c5wjmc/free_roam_events_schedule/es698ne/">Reddit</a>. Spotted any inaccurate data or bugs? Submit an issue/PR on <a href="https://github.com/richardwestenra/rdr2-free-roam-event-schedule">GitHub</a>, or post a comment below.</p>
       <div id="disqus_thread" class="wrapper-small">
         <noscript>
-          <p class="browsehappy">
-            Please enable JavaScript to view the
-            <a href="http://disqus.com/?ref_noscript">
-              comments powered by Disqus.
-            </a>
-          </p>
+          <p class="browsehappy">Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></p>
         </noscript>
       </div>
       <p><small><a href="https://thenounproject.com/term/contrast/765915">Contrast icon by Tawny Whatmore</a> from the <a href="https://thenounproject.com/">Noun Project</a></small></p>
     </main>
+    <script>
+      // Base times are in UTC/GMT
+      // via https://www.reddit.com/r/RedDeadOnline/comments/c5wjmc/free_roam_events_schedule/es698ne/
+      var freeRoamEvents = [
+        ['00:00', 'Master Archer'],
+        ['00:45', 'Railroad Baron'],
+        ['01:30', 'Wild Animal Kills'],
+        ['02:15', 'Fishing Challenge'],
+        ['03:00', 'Fool’s Gold'],
+        ['03:45', 'Master Archer'],
+        ['04:30', 'Lake Fishing Challenge'],
+        ['05:15', 'King of the Castle'],
+        ['06:00', 'Cold Dead Hands'],
+        ['06:45', 'Dispatch Rider'],
+        ['07:30', 'Railroad Baron'],
+        ['08:15', 'Wild Animal Kills'],
+        ['09:00', 'Fishing Challenge'],
+        ['09:45', 'Fool’s Gold'],
+        ['10:30', 'Master Archer'],
+        ['11:15', 'Long Arm Kills'],
+        ['12:00', 'King of the Castle'],
+        ['12:45', 'Cold Dead Hands'],
+        ['13:30', 'Dispatch Rider'],
+        ['14:15', 'Railroad Baron'],
+        ['15:00', 'Wild Animal Kills'],
+        ['15:45', 'Fishing Challenge'],
+        ['16:30', 'Fool’s Gold'],
+        ['17:15', 'Master Archer'],
+        ['18:00', 'Long Arm Kills'],
+        ['18:45', 'King of the Castle'],
+        ['19:30', 'Cold Dead Hands'],
+        ['20:15', 'Dispatch Rider'],
+        ['21:00', 'Railroad Baron'],
+        ['21:45', 'Wild Animal Kills'],
+        ['22:30', 'Fishing Challenge'],
+        ['23:15', 'Fool’s Gold']
+      ];
+      // via https://docs.google.com/spreadsheets/d/e/2PACX-1vSo-sGVHJMhviJJWKkKS_pvDhY08IVjNtsEC3fb1TAFedDHk3f5lDMae_o2Fj4n8KNVUuxejbyDdhUo/pubhtml
+      var roleEvents = [
+        ['07:52', 'Day of Reckoning (Bounty Hunter)'],
+        ['09:22', 'Salvage (Collector)'],
+        ['10:52', 'Trade Route (Trader)'],
+        ['12:22', 'Manhunt (Bounty Hunter)'],
+        ['13:52', 'Day of Reckoning (Bounty Hunter)'],
+        ['15:22', 'Salvage (Collector)'],
+        ['16:52', 'Trade Route (Trader)'],
+        ['18:22', 'Manhunt (Bounty Hunter)'],
+        ['19:52', 'Day of Reckoning (Bounty Hunter)'],
+        ['21:22', 'Salvage (Collector)'],
+        ['22:52', 'Trade Route (Trader)'],
+        ['00:22', 'Manhunt (Bounty Hunter)'],
+        ['01:52', 'Day of Reckoning (Bounty Hunter)'],
+        ['03:22', 'Salvage (Collector)'],
+        ['04:52', 'Trade Route (Trader)'],
+        ['06:22', 'Manhunt (Bounty Hunter)'],
+      ];
+    </script>
     <script src="main.js"></script>
   </body>
 </html>

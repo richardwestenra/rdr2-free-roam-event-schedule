@@ -1,70 +1,107 @@
 // Written in ES5 so that it'll work in older browsers without transpilation.
 // Probably unnecessary but whatever, don't @ me
 
-(function(){
-  var eventFrequency = 45 * 60 * 1000;
+(function() {
+  // Frequency in minutes
+  var eventFrequency = {
+    freeRoam: 45,
+    role: 90
+  };
 
   // Select DOM elements
-  var times = document.getElementById('times');
-  var nextEventName = document.getElementById('next-event-name');
-  var nextEventTime = document.getElementById('next-event-time');
-  var nextEventEta = document.getElementById('next-event-eta');
-  var locale = document.getElementById('locale');
+  var elements = {
+    freeRoam: {
+      container: document.getElementById('free-roam-schedule'),
+      nextEventName: document.getElementById('next-fr-event-name'),
+      nextEventTime: document.getElementById('next-fr-event-time'),
+      nextEventEta: document.getElementById('next-fr-event-eta')
+    },
+    role: {
+      container: document.getElementById('role-schedule'),
+      nextEventName: document.getElementById('next-role-event-name'),
+      nextEventTime: document.getElementById('next-role-event-time'),
+      nextEventEta: document.getElementById('next-role-event-eta')
+    },
+    locale: document.getElementById('locale')
+  };
 
   /**
    * Update the list of event times
+   * @param {Array} schedule List of event times
+   * @param {string} key Object property key (either freeRoam/role)
    */
-  function updateList() {
-    var timesList = document.createElement('ul');
+  function updateList(schedule, key) {
+    var el = elements[key];
+    var frequency = minutesToMilliseconds(eventFrequency[key]);
+    var list = document.createElement('ul');
     schedule.forEach(function(t, i) {
       var event = calculateEventTimes(t);
       var li = document.createElement('li');
-      if (event.eta > 0 && event.eta < eventFrequency) {
+      if (event.eta > 0 && event.eta < frequency) {
         li.classList.add('next-event');
-        nextEventName.innerHTML = event.name;
-        nextEventTime.innerHTML = event.timeString;
-        nextEventEta.innerHTML = event.etaText;
+        el.nextEventName.innerHTML = event.name;
+        el.nextEventTime.innerHTML = event.timeString;
+        el.nextEventEta.innerHTML = event.etaText;
       }
-      li.append(getAnchor(i + 1));
+      li.append(getAnchor(key.toLowerCase() + (i + 1)));
       li.append(event.timeString + ' - ' + event.name);
-      timesList.append(li);
+      if (event.role) {
+        var role = document.createElement('span');
+        role.innerText = ' (' + event.role + ')';
+        li.append(role);
+      }
+      list.append(li);
     });
-    times.innerHTML = timesList.outerHTML;
+    el.container.innerHTML = list.outerHTML;
   }
 
   /**
    * Create an anchor link
-   * @param {number} index
+   * @param {string} id Unique identifier
    * @return {Node} anchor link element
    */
-  function getAnchor(index) {
+  function getAnchor(id) {
     var anchor = document.createElement('a');
-    anchor.setAttribute('id', index);
-    anchor.setAttribute('href', '#' + index);
+    anchor.setAttribute('id', id);
+    anchor.setAttribute('href', '#' + id);
     anchor.innerText = '#';
     return anchor;
   }
 
   /**
+   * Convert minutes to milliseconds
+   * @param {number} t Time in minutes
+   * @return {number} Time in milliseconds
+   */
+  function minutesToMilliseconds(t) {
+    return t * 60 * 1000;
+  }
+
+  /**
    * Format the event datum and perform time-zone calculations
-   * @param {Array} t Event datum containing time and name
+   * @param {Array} d Event datum containing time and name
    * @return {Object} Formatted event datum
    */
-  function calculateEventTimes(t) {
-    var eventTime = t[0];
+  function calculateEventTimes(d) {
+    var eventTime = d[0];
     var now = new Date();
-    var eventDateTime = new Date([now.toDateString(), eventTime, 'UTC'].join(' '));
+    var eventDateTime = new Date(
+      [now.toDateString(), eventTime, 'UTC'].join(' ')
+    );
     var eta = eventDateTime - now;
     // Ensure that all event dates are in the future, to fix timezone bug
     if (eta <= 0) {
       var tomorrow = new Date();
       tomorrow.setDate(now.getDate() + 1);
-      eventDateTime = new Date([tomorrow.toDateString(), eventTime, 'UTC'].join(' '));
+      eventDateTime = new Date(
+        [tomorrow.toDateString(), eventTime, 'UTC'].join(' ')
+      );
       eta = eventDateTime - now;
     }
     return {
       dateTime: eventDateTime,
-      name: t[1],
+      name: d[1],
+      role: d[2],
       eta: eta,
       etaText: getEtaText(eta),
       timeString: eventDateTime.toLocaleTimeString('default', {
@@ -121,20 +158,27 @@
    * Update the user's time zone in intro paragraph
    */
   function showTimeZone() {
-    locale.innerText = ' (' + getTimezone() + ')';
+    elements.locale.innerText = ' (' + getTimezone() + ')';
+  }
+
+  /**
+   * Update both lists
+   */
+  function update() {
+    updateList(freeRoamEvents, 'freeRoam');
+    updateList(roleEvents, 'role');
   }
 
   // Initialise
   showTimeZone();
-  updateList();
+  update();
 
   // Update event list every 10 seconds
-  window.setInterval(updateList, 10000);
+  window.setInterval(update, 10000);
 })();
 
-
 //--- Theme switcher ---//
-(function(){
+(function() {
   var localStorageKey = 'rdr2-freeroam-schedule-theme';
   var THEMES = ['dark', 'light'];
   var themeButton = document.querySelector('#theme');
@@ -162,9 +206,8 @@
   });
 })();
 
-
 //--- Initialise Disqus ---//
-(function(){
+(function() {
   var disqus_shortname = 'richardwestenra';
   var dsq = document.createElement('script');
   dsq.type = 'text/javascript';
