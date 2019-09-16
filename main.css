@@ -8,8 +8,8 @@ body.light {
   color: #333;
 }
 body.dark {
-  background: #222;
-  color: #ddd;
+  background: #1d1d1d;
+  color: #e6e6e6;
 }
 
 .light a {
