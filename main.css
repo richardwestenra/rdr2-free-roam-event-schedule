@@ -171,3 +171,16 @@ li.next-event {
 #disqus_thread {
   margin-top: 3em;
 }
+
+.browsehappy {
+  font-size: 22px;
+  font-weight: bold;
+  border: 2px solid;
+  padding: 20px;
+}
+.light .browsehappy {
+  color: #c3260a;
+}
+.dark .browsehappy {
+  color: #f9775f;
+}
