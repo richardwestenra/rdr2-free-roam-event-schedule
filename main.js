@@ -179,11 +179,11 @@
 
 //--- Theme switcher ---//
 (function() {
-  var localStorageKey = 'rdr2-freeroam-schedule-theme';
+  var localStorageKey = 'rdr2-event-schedule-theme';
   var THEMES = ['dark', 'light'];
   var themeButton = document.querySelector('#theme');
   // Detect localstorage value and use that if it exists
-  var currentTheme = localStorage.getItem(localStorageKey) || THEMES[1];
+  var currentTheme = localStorage.getItem(localStorageKey) || THEMES[0];
   updateTheme(currentTheme);
 
   function updateTheme(theme, updateStorage) {
