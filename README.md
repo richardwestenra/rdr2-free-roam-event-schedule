@@ -4,7 +4,7 @@ A basic webpage that shows the daily RDR2 online event timetable, and the next u
 
 ## Installation
 
-It's all static vanilla HTML/CSS/JS. Clone it and run it on a local web server. I'm using [npm serve])(https://www.npmjs.com/package/serve).
+It's all static vanilla HTML/CSS/JS. Clone it and run it on a local web server. I'm using [npm serve](https://www.npmjs.com/package/serve).
 
 ## Contributing
 
