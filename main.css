@@ -87,6 +87,37 @@ body.dark {
   }
 }
 
+.become-patron-button {
+  display: inline-block;
+  background: rgb(232, 91, 70);
+  padding: 0.5em 1.2em;
+  border-radius: 2em;
+  text-decoration: none;
+  margin: 0 0.5em;
+  outline: none;
+}
+.wrapper a.become-patron-button {
+  color: white;
+}
+.become-patron-button:hover {
+  background-color: rgb(231, 81, 59);
+}
+.light .become-patron-button:focus {
+  box-shadow: 0 0 0 3px #333;
+}
+.dark .become-patron-button:focus {
+  box-shadow: 0 0 0 3px #ddd;
+}
+.become-patron-button:before {
+  content: '';
+  display: inline-block;
+  background: url('./patreon-logo.svg') no-repeat center;
+  background-size: contain;
+  width: 0.9em;
+  height: 0.9em;
+  margin: 0 0.5em 0 -0.1em;
+}
+
 .wrapper {
   margin: 0 auto;
   max-width: 1300px;
