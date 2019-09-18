@@ -46,7 +46,7 @@ body.dark {
   border: none;
   color: inherit;
   font-family: inherit;
-  font-size: inherit;
+  font-size: 0.9em;
   display: flex;
   align-items: center;
   cursor: pointer;
@@ -81,9 +81,9 @@ body.dark {
 .dark .theme-button svg {
   fill: #fff;
 }
-@media (max-width: 600px) {
+@media (min-width: 900px) {
   .theme-button {
-    font-size: 0.85em;
+    font-size: 1.3em;
   }
 }
 
