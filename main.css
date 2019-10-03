@@ -1,6 +1,7 @@
 body {
   margin: 0;
   padding: 3em 1.5em;
+  line-height: 1.5em;
   font-family: Helvetica, Arial, sans-serif;
 }
 body.light {
@@ -221,15 +222,22 @@ li.next-event {
   background: #943928;
 }
 
-.browsehappy {
-  font-size: 22px;
-  font-weight: bold;
-  border: 2px solid;
-  padding: 20px;
+.announcement,
+.warning {
+  font-size: 1.1em;
+  border: 1px solid;
+  padding: 1.5em;
 }
-.light .browsehappy {
+.warning {
+  border-width: 2px;
+  font-weight: bold;
+}
+.light .warning {
   color: #c3260a;
 }
-.dark .browsehappy {
+.dark .warning {
   color: #f9775f;
+}
+.browsehappy {
+  font-size: 1.3em;
 }
