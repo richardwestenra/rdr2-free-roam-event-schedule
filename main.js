@@ -2,6 +2,8 @@
 // Probably unnecessary but whatever, don't @ me
 
 (function() {
+  var timezone = getTimezone();
+
   // Frequency in minutes
   var eventFrequency = {
     freeRoam: 45,
@@ -28,13 +30,14 @@
   /**
    * Update the list of event times
    * @param {Array} schedule List of event times
-   * @param {string} key Object property key (either freeRoam/role)
+   * @param {string} key Property key (either freeRoam/role)
    */
   function updateList(schedule, key) {
     var el = elements[key];
     var frequency = minutesToMilliseconds(eventFrequency[key]);
     var list = document.createElement('ul');
     schedule.forEach(function(t, i) {
+      var id = i + 1;
       var event = calculateEventTimes(t);
       var li = document.createElement('li');
       if (event.eta > 0 && event.eta < frequency) {
@@ -43,16 +46,50 @@
         el.nextEventTime.innerHTML = event.timeString;
         el.nextEventEta.innerHTML = event.etaText;
       }
-      li.append(getAnchor(key.toLowerCase() + (i + 1)));
-      li.append(event.timeString + ' - ' + event.name);
-      if (event.role) {
-        var role = document.createElement('span');
-        role.innerText = ' (' + event.role + ')';
-        li.append(role);
-      }
+      li.append(getAnchor(key.toLowerCase() + id));
+      var text = document.createElement('span');
+      text.innerText = event.timeString + ' - ' + event.name;
+      li.append(text);
+      li.append(getFormLink(event, key, id));
       list.append(li);
     });
     el.container.innerHTML = list.outerHTML;
+  }
+
+  /**
+   * Create an anchor link
+   * @param {Object} event Event datum
+   * @param {string} key Property key (either freeRoam/role)
+   * @param {string} id Unique identifier
+   * @return {Node} anchor link element
+   */
+  function getFormLink(event, key, id) {
+    var anchor = document.createElement('a');
+    anchor.setAttribute('target', '_blank');
+    var eventType = {
+      freeRoam: 'Free-roam+event',
+      role: 'Role+event'
+    };
+    var qsValues = {
+      'entry.1897203079': eventType[key],
+      'entry.1753454597': timezone,
+      'entry.1235834234': event.timeString,
+      'entry.1278810820': event.utcTimeString,
+      'entry.698549775': event.name,
+      'entry.988863521': String(id)
+    };
+    var queryString = Object.keys(qsValues)
+      .map(function(qsKey) {
+        return [qsKey, qsValues[qsKey].replace(/\s/g, '+')].join('=');
+      })
+      .join('&');
+    var url =
+      'https://docs.google.com/forms/d/e/1FAIpQLSeaEdri09zJXnLksx4icLAY70tWGGDqyuPvaQZQMnc4R9R9ag/viewform?usp=pp_url&' +
+      queryString;
+    anchor.setAttribute('href', url);
+    anchor.className = 'form-link';
+    anchor.innerText = 'Submit correction';
+    return anchor;
   }
 
   /**
@@ -63,6 +100,7 @@
   function getAnchor(id) {
     var anchor = document.createElement('a');
     anchor.setAttribute('id', id);
+    anchor.className = 'anchor';
     anchor.setAttribute('href', '#' + id);
     anchor.innerText = '#';
     return anchor;
@@ -101,13 +139,13 @@
     return {
       dateTime: eventDateTime,
       name: d[1],
-      role: d[2],
       eta: eta,
       etaText: getEtaText(eta),
       timeString: eventDateTime.toLocaleTimeString('default', {
         hour: '2-digit',
         minute: '2-digit'
-      })
+      }),
+      utcTimeString: eventTime
     };
   }
 
@@ -158,7 +196,7 @@
    * Update the user's time zone in intro paragraph
    */
   function showTimeZone() {
-    elements.locale.innerText = ' (' + getTimezone() + ')';
+    elements.locale.innerText = ' (' + timezone + ')';
   }
 
   /**

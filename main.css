@@ -174,23 +174,47 @@ b {
 }
 
 .schedule li {
+  display: flex;
   padding: 0.5em 0.8em;
 }
 
-.schedule a {
+.anchor {
   text-decoration: none;
   color: inherit;
   opacity: 0;
   transition: 0.3s;
   outline: none;
-  margin-left: -2.5em;
+  margin: -0.5em 0 -0.5em -2.5em;
   padding: 0.5em 1.5em 0.5em 0.5em;
   font-weight: 600;
 }
 
-.schedule li:hover a,
-.schedule li a:focus {
+li:hover .anchor,
+.anchor:focus {
   opacity: 0.5;
+  color: inherit;
+}
+
+li .anchor:hover {
+  opacity: 1;
+  color: inherit;
+}
+
+li span {
+  flex: 1;
+}
+
+.form-link {
+  text-decoration: none;
+  opacity: 0.05;
+  transition: 0.3s;
+  outline: none;
+  font-weight: 600;
+}
+
+li:hover .form-link,
+.form-link:focus {
+  opacity: 1;
 }
 
 li:after {
@@ -198,7 +222,8 @@ li:after {
   content: counter(index);
   opacity: 0.15;
   transition: 0.3s;
-  float: right;
+  width: 2.5em;
+  text-align: right;
 }
 
 li:hover:after {
@@ -224,13 +249,14 @@ li.next-event {
 
 .announcement,
 .warning {
-  font-size: 1.1em;
   border: 1px solid;
-  padding: 1.5em;
+  padding: 1em;
 }
 .warning {
   border-width: 2px;
   font-weight: bold;
+  padding: 1.5em;
+  font-size: 1.1em;
 }
 .light .warning {
   color: #c3260a;
