@@ -24,15 +24,15 @@ body.dark {
   color: steelblue;
   text-decoration: none;
 }
-.dark a {
-  color: cyan;
+a {
+  color: orange;
 }
-.dark a:visited {
-  color: lightcyan;
+a:visited {
+  color: #e89f5e;
 }
-.dark a:hover,
-.dark a:focus {
-  color: turquoise;
+a:hover,
+a:focus {
+  color: #ffc457;
   text-decoration: none;
 }
 
