@@ -177,6 +177,12 @@ b {
   display: flex;
   padding: 0.5em 0.8em;
 }
+.light li:nth-child(2n + 1) {
+  background: rgba(0, 0, 0, 0.03);
+}
+.dark li:nth-child(2n + 1) {
+  background: rgba(255, 255, 255, 0.03);
+}
 
 .anchor {
   text-decoration: none;
@@ -188,13 +194,11 @@ b {
   padding: 0.5em 1.5em 0.5em 0.5em;
   font-weight: 600;
 }
-
 li:hover .anchor,
 .anchor:focus {
   opacity: 0.5;
   color: inherit;
 }
-
 li .anchor:hover {
   opacity: 1;
   color: inherit;
@@ -211,7 +215,6 @@ li span {
   outline: none;
   font-weight: 600;
 }
-
 li:hover .form-link,
 .form-link:focus {
   opacity: 1;
@@ -225,16 +228,8 @@ li:after {
   width: 2.5em;
   text-align: right;
 }
-
 li:hover:after {
   opacity: 1;
-}
-
-.light li:nth-child(2n + 1) {
-  background: rgba(0, 0, 0, 0.03);
-}
-.dark li:nth-child(2n + 1) {
-  background: rgba(255, 255, 255, 0.03);
 }
 
 li.next-event {
