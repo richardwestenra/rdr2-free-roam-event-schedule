@@ -82,7 +82,7 @@ a:focus {
 .dark .theme-button svg {
   fill: #fff;
 }
-@media (min-width: 900px) {
+@media (min-width: 600px) {
   .theme-button {
     font-size: 1.3em;
   }
@@ -154,7 +154,7 @@ b {
 .schedule-wrapper section {
   margin: 3em 0;
 }
-@media (min-width: 900px) {
+@media (min-width: 1100px) {
   .schedule-wrapper {
     display: flex;
     margin: 0 -20px;
