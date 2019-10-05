@@ -52,11 +52,11 @@
         </section>
       </section>
       <p>Built with ♥ for the RDR2 community by <a href="http://richardwestenra.com">Richard Westenra</a>. Spotted any inaccurate data or bugs? <a href="https://github.com/richardwestenra/rdr2-free-roam-event-schedule">Submit an issue/PR on GitHub</a>, <a href="https://www.reddit.com/r/RedDeadOnline/comments/cjrf6a/i_made_a_freeroam_event_schedule_that_adjusts_to/">leave a comment on Reddit</a>, <a href="mailto:richard@richardwestenra.com">email me</a>, or <a href="https://twitter.com/richardwestenra">tweet at me</a>.</p>
-      <p><small><strong>Sources:</strong> <a href="https://www.reddit.com/r/RedDeadOnline/comments/c5wjmc/free_roam_events_schedule/es698ne/">Free-roam event data</a>. <a href="https://www.reddit.com/r/RedDeadOnline/comments/d4cpq5/role_specific_freeroam_event_timetable/">Role event data</a>. <a href="https://thenounproject.com/term/contrast/765915">Contrast icon by Tawny Whatmore</a> from the <a href="https://thenounproject.com/">Noun Project</a></small></p>
+      <p><small><strong>*</strong> Random Kills Challenge events include Horseback Kills, Headshot Kills, Bow Kills, Longarm Kills, Sidearm Kills, Fishing or Wild Animal Kills</small></p>
+      <p><small><strong>Event data sources:</strong> <a href="https://www.reddit.com/r/RedDeadOnline/comments/c5wjmc/free_roam_events_schedule/es698ne/">Free-roam</a>. <a href="https://www.reddit.com/r/RedDeadOnline/comments/d4cpq5/role_specific_freeroam_event_timetable/">Role</a>, <a href="https://gtaforums.com/topic/930326-the-full-24h-schedule-of-the-freemode-events/#comments">mixed</a>, plus Adam, Ryan and everyone else who contributed to the updated schedule. <a href="https://thenounproject.com/term/contrast/765915">Contrast icon by Tawny Whatmore</a> from the <a href="https://thenounproject.com/">Noun Project</a></small></p>
     </main>
     <script>
       // Base times are in UTC/GMT
-      // via https://www.reddit.com/r/RedDeadOnline/comments/c5wjmc/free_roam_events_schedule/es698ne/
       var freeRoamEvents = [
         ['00:00', 'Master Archer'],
         ['00:45', 'Railroad Baron'],
@@ -64,7 +64,7 @@
         ['02:15', 'Fishing Challenge'],
         ['03:00', 'Fool’s Gold'],
         ['03:45', 'Master Archer'],
-        ['04:30', 'Lake Fishing Challenge'],
+        ['04:30', 'Random Kills Challenge *'],
         ['05:15', 'King of the Castle'],
         ['06:00', 'Cold Dead Hands'],
         ['06:45', 'Dispatch Rider'],
@@ -73,7 +73,7 @@
         ['09:00', 'Fishing Challenge'],
         ['09:45', 'Fool’s Gold'],
         ['10:30', 'Master Archer'],
-        ['11:15', 'Long Arm Kills'],
+        ['11:15', 'Random Kills Challenge *'],
         ['12:00', 'King of the Castle'],
         ['12:45', 'Cold Dead Hands'],
         ['13:30', 'Dispatch Rider'],
@@ -82,7 +82,7 @@
         ['15:45', 'Fishing Challenge'],
         ['16:30', 'Fool’s Gold'],
         ['17:15', 'Master Archer'],
-        ['18:00', 'Long Arm Kills'],
+        ['18:00', 'Random Kills Challenge *'],
         ['18:45', 'King of the Castle'],
         ['19:30', 'Cold Dead Hands'],
         ['20:15', 'Dispatch Rider'],
@@ -91,13 +91,11 @@
         ['22:30', 'Fishing Challenge'],
         ['23:15', 'Fool’s Gold']
       ];
-      // via https://www.reddit.com/r/RedDeadOnline/comments/d4cpq5/role_specific_freeroam_event_timetable/
-      // Thanks to Adam Norton for updated timetable
       var roleEvents = [
         ['00:22', 'Day of Reckoning (Bounty Hunter)'],
-        ['01:52', 'Salvage (Collector)'],
-        ['03:22', 'Trade Route (Trader)'],
-        ['04:52', 'Salvage (Collector) or Trade Route (Trader)?'],
+        ['01:52', 'Day of Reckoning (Bounty Hunter)'],
+        ['03:22', 'Salvage (Collector)'],
+        ['04:52', 'Trade Route (Trader)?'],
         ['06:22', 'Manhunt (Bounty Hunter)'],
         ['07:52', 'Condor Egg (Collector)'],
         ['09:22', 'Day of Reckoning (Bounty Hunter)'],
