@@ -237,9 +237,7 @@
 
   // Toggle theme on button click
   themeButton.addEventListener('click', function() {
-    var newTheme = THEMES.find(function(d) {
-      return d !== currentTheme;
-    });
+    var newTheme = THEMES[0] === currentTheme ? THEMES[1] : THEMES[0];
     updateTheme(newTheme, true);
   });
 })();
