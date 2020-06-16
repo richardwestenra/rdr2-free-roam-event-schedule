@@ -131,27 +131,27 @@
   function calculateEventTimes(d, id, frequency) {
     var eventTime = d[0];
     var now = new Date();
-    var eventDateTime = new Date(
+    var dateTime = new Date(
       [now.toDateString(), eventTime, 'UTC'].join(' ')
     );
-    var eta = eventDateTime - now;
+    var eta = dateTime - now;
     // Ensure that all event dates are in the future, to fix timezone bug
     if (eta <= 0) {
       var tomorrow = new Date();
       tomorrow.setDate(now.getDate() + 1);
-      eventDateTime = new Date(
+      dateTime = new Date(
         [tomorrow.toDateString(), eventTime, 'UTC'].join(' ')
       );
-      eta = eventDateTime - now;
+      eta = dateTime - now;
     }
     return {
       id: id,
-      dateTime: eventDateTime,
+      dateTime: dateTime,
       name: d[1],
       eta: eta,
       etaText: getEtaText(eta),
       isNext: eta > 0 && eta < frequency,
-      timeString: eventDateTime.toLocaleTimeString('default', {
+      timeString: dateTime.toLocaleTimeString('default', {
         hour: '2-digit',
         minute: '2-digit'
       }),
