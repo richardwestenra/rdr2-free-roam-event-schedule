@@ -36,23 +36,31 @@
     var el = elements[key];
     var frequency = minutesToMilliseconds(eventFrequency[key]);
     var list = document.createElement('ul');
-    schedule.forEach(function(t, i) {
-      var id = i + 1;
-      var event = calculateEventTimes(t);
-      var li = document.createElement('li');
-      if (event.eta > 0 && event.eta < frequency) {
-        li.classList.add('next-event');
-        el.nextEventName.innerHTML = event.name;
-        el.nextEventTime.innerHTML = event.timeString;
-        el.nextEventEta.innerHTML = event.etaText;
-      }
-      li.append(getAnchor(key.toLowerCase() + id));
-      var text = document.createElement('span');
-      text.innerText = event.timeString + ' - ' + event.name;
-      li.append(text);
-      li.append(getFormLink(event, key, id));
-      list.append(li);
-    });
+
+    schedule.map(function(t, i) {
+        return calculateEventTimes(t, i + 1, frequency);
+      })
+      .sort(function(a, b) {
+        // Start the list at midnight regardless of the user's timezone
+        if (a.timeString < b.timeString) return -1;
+        if (a.timeString > b.timeString) return 1;
+        return 0;
+      })
+      .forEach(function(event) {
+        var li = document.createElement('li');
+        if (event.isNext) {
+          li.classList.add('next-event');
+          el.nextEventName.innerHTML = event.name;
+          el.nextEventTime.innerHTML = event.timeString;
+          el.nextEventEta.innerHTML = event.etaText;
+        }
+        li.append(getAnchor(key.toLowerCase() + event.id));
+        var text = document.createElement('span');
+        text.innerText = event.timeString + ' - ' + event.name;
+        li.append(text);
+        li.append(getFormLink(event, key, event.id));
+        list.append(li);
+      });
     el.container.innerHTML = list.outerHTML;
   }
 
@@ -120,7 +128,7 @@
    * @param {Array} d Event datum containing time and name
    * @return {Object} Formatted event datum
    */
-  function calculateEventTimes(d) {
+  function calculateEventTimes(d, id, frequency) {
     var eventTime = d[0];
     var now = new Date();
     var eventDateTime = new Date(
@@ -137,10 +145,12 @@
       eta = eventDateTime - now;
     }
     return {
+      id: id,
       dateTime: eventDateTime,
       name: d[1],
       eta: eta,
       etaText: getEtaText(eta),
+      isNext: eta > 0 && eta < frequency,
       timeString: eventDateTime.toLocaleTimeString('default', {
         hour: '2-digit',
         minute: '2-digit'
