@@ -42,9 +42,11 @@
       })
       .sort(function(a, b) {
         // Start the list at midnight regardless of the user's timezone
-        if (a.timeString < b.timeString) return -1;
-        if (a.timeString > b.timeString) return 1;
-        return 0;
+        var tl = [a, b].map(function(x) {
+          var d = x.dateTime;
+          return (d.getHours() * 60 + d.getMinutes());
+        });
+        return (tl[0] - tl[1]);
       })
       .forEach(function(event) {
         var li = document.createElement('li');
