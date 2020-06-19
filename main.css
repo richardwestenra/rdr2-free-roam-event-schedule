@@ -220,13 +220,23 @@ li:hover .form-link,
 .form-link:focus {
   opacity: 1;
 }
+@media (max-width: 500px) {
+  .form-link {
+    font-size: 0;
+    opacity: 0.2;
+  }
+  .form-link:before {
+    content: '✏️';
+    font-size: 12px;
+  }
+}
 
 li:after {
   counter-increment: index;
   content: counter(index);
   opacity: 0.15;
   transition: 0.3s;
-  width: 2.5em;
+  width: 2em;
   text-align: right;
 }
 li:hover:after {

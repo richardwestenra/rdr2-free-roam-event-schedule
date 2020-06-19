@@ -99,6 +99,7 @@
     anchor.setAttribute('href', url);
     anchor.className = 'form-link';
     anchor.innerText = 'Submit correction';
+    anchor.setAttribute('title', 'Incorrect time? Send me correct details and I\'ll update it.');
     return anchor;
   }
 
