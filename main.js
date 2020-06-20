@@ -42,11 +42,7 @@
       })
       .sort(function(a, b) {
         // Start the list at midnight regardless of the user's timezone
-        var tl = [a, b].map(function(x) {
-          var d = x.dateTime;
-          return (d.getHours() * 60 + d.getMinutes());
-        });
-        return (tl[0] - tl[1]);
+        return (a.timeNumber - b.timeNumber);
       })
       .forEach(function(event) {
         var li = document.createElement('li');
@@ -158,6 +154,7 @@
         hour: '2-digit',
         minute: '2-digit'
       }),
+      timeNumber: (dateTime.getHours() * 60 + dateTime.getMinutes()),
       utcTimeString: eventTime
     };
   }
