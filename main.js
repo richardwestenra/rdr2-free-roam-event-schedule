@@ -129,18 +129,18 @@
    */
   function calculateEventTimes(d, id, frequency) {
     var eventTime = d[0];
-    var now = new Date();
-    var dateTime = new Date(
-      [now.toDateString(), eventTime, 'UTC'].join(' ')
-    );
+    var now = Date.now();
+    var oneDay = minutesToMilliseconds(24 * 60);
+    var dateTime = getDateTime(now, eventTime);
     var eta = dateTime - now;
-    // Ensure that all event dates are in the future, to fix timezone bug
+    // Ensure that event dates are not in the past or too far
+    // in the future, where timezone is not UTC
+    if (eta > frequency) {
+      dateTime = getDateTime(now - oneDay, eventTime);
+      eta = dateTime - now;
+    }
     if (eta <= 0) {
-      var tomorrow = new Date();
-      tomorrow.setDate(now.getDate() + 1);
-      dateTime = new Date(
-        [tomorrow.toDateString(), eventTime, 'UTC'].join(' ')
-      );
+      dateTime = getDateTime(now + oneDay, eventTime);
       eta = dateTime - now;
     }
     return {
@@ -157,6 +157,16 @@
       timeNumber: (dateTime.getHours() * 60 + dateTime.getMinutes()),
       utcTimeString: eventTime
     };
+  }
+
+  /**
+   * Get the Date object for an event
+   * @param {number} date Timestamp, e.g. Date.now()
+   */
+  function getDateTime(date, eventTime) {
+    return new Date(
+      [new Date(date).toDateString(), eventTime, 'UTC'].join(' ')
+    );
   }
 
   /**
