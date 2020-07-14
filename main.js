@@ -149,7 +149,7 @@
       name: d[1],
       eta: eta,
       etaText: getEtaText(eta),
-      isNext: eta > 0 && eta < frequency,
+      isNext: eta > 0 && eta <= frequency,
       timeString: dateTime.toLocaleTimeString('default', {
         hour: '2-digit',
         minute: '2-digit'
