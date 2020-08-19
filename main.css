@@ -151,6 +151,20 @@ b {
   color: #f9775f;
 }
 
+.news h2 {
+  font-size: 0.9em;
+  margin: 0;
+  text-transform: uppercase;
+}
+.news p {
+  font-size: 0.85em;
+  margin: 0.5em 0;
+  opacity: 0.9;
+}
+time {
+  font-weight: bold;
+}
+
 .schedule-wrapper section {
   margin: 3em 0;
 }
