@@ -152,8 +152,9 @@ b {
 }
 
 .news h2 {
+  display: inline-block;
   font-size: 0.9em;
-  margin: 0;
+  margin: 0 0.4em 0 0;
   text-transform: uppercase;
 }
 .news p {

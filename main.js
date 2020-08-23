@@ -261,3 +261,32 @@
     updateTheme(newTheme, true);
   });
 })();
+
+
+//--- Toggle news ---//
+(function() {
+  var localStorageKey = 'rdr2-event-schedule-news';
+  var newsContainer = document.querySelector('#news');
+  var newsButton = document.querySelector('#toggle-news');
+  // Detect localstorage value and use that if it exists
+  var showNews = getLocalStorageValue();
+  toggleNews();
+
+  function getLocalStorageValue() {
+    var value = localStorage.getItem(localStorageKey);
+    return value && value === 'false' ? false : true;
+  }
+
+  function toggleNews() {
+    newsContainer.style.display = showNews ? 'block' : 'none';
+    newsButton.innerText = showNews ? 'hide' : 'show';
+  }
+
+  // Toggle news visibility on button click
+  newsButton.addEventListener('click', function(event) {
+    showNews = !showNews;
+    toggleNews();
+    localStorage.setItem(localStorageKey, showNews);
+    event.preventDefault();
+  });
+})();
