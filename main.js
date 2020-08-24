@@ -266,7 +266,7 @@
 (function() {
   var localStorageKey = 'rdr2-event-schedule-news';
   var newsContainer = document.querySelector('#news');
-  var newsButton = document.querySelector('#toggle-news');
+  var newsButton = newsContainer.querySelector('#toggle-news');
   // Detect localstorage value and use that if it exists
   var showNews = getLocalStorageValue();
   toggleNews();
@@ -277,7 +277,7 @@
   }
 
   function toggleNews() {
-    newsContainer.style.display = showNews ? 'block' : 'none';
+    newsContainer.classList.toggle('hide', !showNews);
     newsButton.innerText = showNews ? 'hide' : 'show';
   }
 

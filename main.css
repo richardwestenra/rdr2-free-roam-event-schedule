@@ -157,7 +157,14 @@ b {
   margin: 0 0.4em 0 0;
   text-transform: uppercase;
 }
-.news p {
+.news ul {
+  margin: 0;
+  padding-left: 1.5em;
+}
+.news.hide ul {
+  display: none;
+}
+.news li {
   font-size: 0.85em;
   margin: 0.5em 0;
   opacity: 0.9;
@@ -192,10 +199,10 @@ time {
   display: flex;
   padding: 0.5em 0.8em;
 }
-.light li:nth-child(2n + 1) {
+.light .schedule li:nth-child(2n + 1) {
   background: rgba(0, 0, 0, 0.03);
 }
-.dark li:nth-child(2n + 1) {
+.dark .schedule li:nth-child(2n + 1) {
   background: rgba(255, 255, 255, 0.03);
 }
 
