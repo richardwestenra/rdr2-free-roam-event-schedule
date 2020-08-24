@@ -29,15 +29,14 @@
 
   /**
    * Update the list of event times
-   * @param {Array} schedule List of event times
    * @param {string} key Property key (either freeRoam/role)
    */
-  function updateList(schedule, key) {
+  function updateList(key) {
     var el = elements[key];
     var frequency = minutesToMilliseconds(eventFrequency[key]);
     var list = document.createElement('ul');
 
-    schedule.map(function(t, i) {
+    window.rdoEvents[key].map(function(t, i) {
         return calculateEventTimes(t, i + 1, frequency);
       })
       .sort(function(a, b) {
@@ -223,8 +222,8 @@
    * Update both lists
    */
   function update() {
-    updateList(freeRoamEvents, 'freeRoam');
-    updateList(roleEvents, 'role');
+    updateList('freeRoam');
+    updateList('role');
   }
 
   // Initialise
