@@ -226,7 +226,7 @@ li .anchor:hover {
   color: inherit;
 }
 
-li span {
+.schedule li span {
   flex: 1;
 }
 
@@ -253,7 +253,7 @@ li:hover .form-link,
   }
 }
 
-li:after {
+.schedule li:after {
   counter-increment: index;
   content: counter(index);
   opacity: 0.15;
@@ -261,7 +261,7 @@ li:after {
   width: 2em;
   text-align: right;
 }
-li:hover:after {
+.schedule li:hover:after {
   opacity: 1;
 }
 
