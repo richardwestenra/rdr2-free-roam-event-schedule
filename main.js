@@ -6,13 +6,13 @@
 
   // Frequency in minutes
   var eventFrequency = {
-    freeRoam: 45,
+    general: 45,
     role: 90
   };
 
   // Select DOM elements
   var elements = {
-    freeRoam: {
+    general: {
       container: document.getElementById('free-roam-schedule'),
       nextEventName: document.getElementById('next-fr-event-name'),
       nextEventTime: document.getElementById('next-fr-event-time'),
@@ -29,7 +29,7 @@
 
   /**
    * Update the list of event times
-   * @param {string} key Property key (either freeRoam/role)
+   * @param {string} key Property key (either general/role)
    */
   function updateList(key) {
     var el = elements[key];
@@ -64,7 +64,7 @@
   /**
    * Create an anchor link
    * @param {Object} event Event datum
-   * @param {string} key Property key (either freeRoam/role)
+   * @param {string} key Property key (either general/role)
    * @param {string} id Unique identifier
    * @return {Node} anchor link element
    */
@@ -72,7 +72,7 @@
     var anchor = document.createElement('a');
     anchor.setAttribute('target', '_blank');
     var eventType = {
-      freeRoam: 'Free-roam+event',
+      general: 'Free-roam+event',
       role: 'Role+event'
     };
     var qsValues = {
@@ -222,7 +222,7 @@
    * Update both lists
    */
   function update() {
-    updateList('freeRoam');
+    updateList('general');
     updateList('role');
   }
 
