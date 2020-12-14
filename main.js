@@ -267,6 +267,8 @@
   var localStorageKey = 'rdr2-event-schedule-news';
   var newsContainer = document.querySelector('#news');
   var newsButton = newsContainer.querySelector('#toggle-news');
+  var newsLi = newsContainer.querySelectorAll('li:not(:first-child)');
+
   // Detect localstorage value and use that if it exists
   var showNews = getLocalStorageValue();
   toggleNews();
@@ -277,8 +279,10 @@
   }
 
   function toggleNews() {
-    newsContainer.classList.toggle('hide', !showNews);
-    newsButton.innerText = showNews ? 'hide' : 'show';
+    newsLi.forEach(function(node) {
+      node.classList.toggle('hide', !showNews);
+    });
+    newsButton.innerText = showNews ? 'hide' : 'show all';
   }
 
   // Toggle news visibility on button click
