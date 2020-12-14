@@ -275,7 +275,7 @@
 
   function getLocalStorageValue() {
     var value = localStorage.getItem(localStorageKey);
-    return value && value === 'false' ? false : true;
+    return value && value === 'true' ? true : false;
   }
 
   function toggleNews() {
