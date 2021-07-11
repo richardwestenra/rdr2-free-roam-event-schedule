@@ -17,10 +17,12 @@
     </script>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
     <script>
-      (adsbygoogle = window.adsbygoogle || []).push({
-        google_ad_client: "ca-pub-5334550093857056",
-        enable_page_level_ads: !window.location.search.includes('disable-ads')
-      });
+      if (!window.location.search.includes('disable-ads')) {
+        (adsbygoogle = window.adsbygoogle || []).push({
+          google_ad_client: "ca-pub-5334550093857056",
+          enable_page_level_ads: true
+        });
+      }
     </script>
   </head>
   <body class="dark">
