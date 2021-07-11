@@ -2,6 +2,7 @@
 // Probably unnecessary but whatever, don't @ me
 
 (function() {
+  var hasReceivedAPIData = false;
   var timezone = getTimezone();
 
   // Frequency in minutes
@@ -29,14 +30,15 @@
 
   /**
    * Update the list of event times
+   * @param {array} data The list of event times
    * @param {string} key Property key (either freeRoam/role)
    */
-  function updateList(key) {
+  function updateList(data, key) {
     var el = elements[key];
     var frequency = minutesToMilliseconds(eventFrequency[key]);
     var list = document.createElement('ul');
 
-    window.rdoEvents[key].map(function(t, i) {
+    data.map(function(t, i) {
         return calculateEventTimes(t, i + 1, frequency);
       })
       .sort(function(a, b) {
@@ -219,19 +221,56 @@
   }
 
   /**
+   * Format API data
+   */
+  function formatAPIData(data) {
+    return Object.keys(data).map(function(time) {
+      return [
+        time,
+        data[time].name
+          .replace(/fme_|role_/g, '')
+          .replace(/_/g,' ')
+          .replace(/\b\w/g , function(m){
+            return m.toUpperCase();
+          })
+      ]
+    });
+  }
+
+  /**
    * Update both lists
    */
   function update() {
-    updateList('freeRoam');
-    updateList('role');
+    // Request API data
+    fetch('https://api.rdo.gg/fme/')
+      .then(function(response) {
+        if (!response.ok) {
+          throw Error(response.statusText);
+        }
+        return response.json();
+      })
+      .then(function(data) {
+        // Modify API data into expected schema
+        updateList(formatAPIData(data.default), 'freeRoam');
+        updateList(formatAPIData(data.themed), 'role');
+        hasReceivedAPIData = true;
+      })
+      .catch((error) => {
+        console.error(error);
+        // Fall back to hard-coded list if fetch has been unsuccessful
+        if (!hasReceivedAPIData) {
+          updateList(window.rdoEvents.freeRoam, 'freeRoam');
+          updateList(window.rdoEvents.role, 'role');
+        }
+      });
   }
 
   // Initialise
   showTimeZone();
   update();
 
-  // Update event list every 10 seconds
-  window.setInterval(update, 10000);
+  // Update event list every 30 seconds
+  window.setInterval(update, 30000);
 })();
 
 //--- Theme switcher ---//
