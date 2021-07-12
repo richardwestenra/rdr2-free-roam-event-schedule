@@ -2,7 +2,6 @@
 // Probably unnecessary but whatever, don't @ me
 
 (function() {
-  var hasReceivedAPIData = false;
   var timezone = getTimezone();
 
   // Frequency in minutes
@@ -240,8 +239,21 @@
   /**
    * Update both lists
    */
-  function update() {
-    // Request API data
+  function update(data) {
+    updateList(data.freeRoam, 'freeRoam');
+    updateList(data.role, 'role');
+  }
+
+  function initialise(data) {
+    update(data);
+    // Update event list every 10 seconds
+    window.setInterval(update.bind(this, data), 10000);
+  }
+
+  /**
+   * Fetch API data, and fall back to hard-coded data on error
+   */
+  function requestAPIData() {
     fetch('https://api.rdo.gg/fme/')
       .then(function(response) {
         if (!response.ok) {
@@ -251,26 +263,24 @@
       })
       .then(function(data) {
         // Modify API data into expected schema
-        updateList(formatAPIData(data.default), 'freeRoam');
-        updateList(formatAPIData(data.themed), 'role');
-        hasReceivedAPIData = true;
+        initialise({
+          freeRoam: formatAPIData(data.default),
+          role: formatAPIData(data.themed)
+        })
       })
-      .catch((error) => {
+      .catch(function(error) {
         console.error(error);
         // Fall back to hard-coded list if fetch has been unsuccessful
-        if (!hasReceivedAPIData) {
-          updateList(window.rdoEvents.freeRoam, 'freeRoam');
-          updateList(window.rdoEvents.role, 'role');
-        }
-      });
+        initialise({
+          freeRoam: window.rdoEvents.freeRoam,
+          role: window.rdoEvents.role
+        })
+      })
   }
 
   // Initialise
   showTimeZone();
-  update();
-
-  // Update event list every 30 seconds
-  window.setInterval(update, 30000);
+  requestAPIData();
 })();
 
 //--- Theme switcher ---//
