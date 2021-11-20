@@ -1,0 +1,16 @@
+{
+  "name": "rdr2-free-roam-event-schedule",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/richardwestenra/rdr2-free-roam-event-schedule.git",
+  "author": "DirtyyDogg <rbreddels@hotmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "micro",
+    "dev": "micro-dev"
+  },
+  "devDependencies": {
+    "micro": "^9.3.4",
+    "micro-dev": "^3.0.0"
+  }
+}
