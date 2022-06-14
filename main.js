@@ -223,11 +223,38 @@
    * Format API data
    */
   function formatAPIData(data) {
+    var keys = {
+        dd_intro: "Dispatch Rider",
+        fmarch_name: "Master Archer",
+        fme_at_name: "Wild Animal Tagging",
+        fme_ce_name: "Condor Egg",
+        fme_esc_name: "Day of Reckoning",
+        fme_kotc_variation_ffa_name: "King of the Castle",
+        fme_kotr_name: "Railroad Baron",
+        fme_pla_name: "Protect Legendary Animal",
+        fme_ru_name: "Manhunt",
+        fme_st_name: "Trade Route",
+        fme_wk_name: "Salvage",
+        fme_wp_name: "Wildlife Photographer",
+        fmechal_variation_bow_name: "Bow Kills Challenge",
+        fmechal_variation_fishing_lake_name: "Lake Fishing Challenge",
+        fmechal_variation_fishing_river_name: "River Fishing Challenge",
+        fmechal_variation_fishing_swamp_name: "Swamp Fishing Challenge",
+        fmechal_variation_flying_bird_name: "Bird Shooting Contest",
+        fmechal_variation_headshot_name: "Headshot Kills Challenge",
+        fmechal_variation_herbalist_name: "Herb Picking Contest",
+        fmechal_variation_horseback_name: "Horseback Kills Challenge",
+        fmechal_variation_hunting_name: "Wild Animal Kills Challenge",
+        fmechal_variation_longarm_name: "Longarm Kills Challenge",
+        fmechal_variation_sidearm_name: "Sidearm Kills Challenge",
+        gh_name: "Fool's Gold",
+        hp_intro: "Cold Dead Hands",
+    };
     return Object.keys(data).map(function(time) {
       return [
         time,
-        data[time].name
-          .replace(/fme_|role_/g, '')
+        keys[data[time].text] ||
+        (data[time].alt || data[time].id)
           .replace(/_/g,' ')
           .replace(/\b\w/g , function(m){
             return m.toUpperCase();
@@ -254,7 +281,7 @@
    * Fetch API data, and fall back to hard-coded data on error
    */
   function requestAPIData() {
-    fetch('https://api.rdo.gg/fme/')
+    fetch('https://api.rdo.gg/events/')
       .then(function(response) {
         if (!response.ok) {
           throw Error(response.statusText);
@@ -264,7 +291,7 @@
       .then(function(data) {
         // Modify API data into expected schema
         initialise({
-          freeRoam: formatAPIData(data.default),
+          freeRoam: formatAPIData(data.standard),
           role: formatAPIData(data.themed)
         })
       })
