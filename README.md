@@ -1,6 +1,6 @@
 # Red Dead Online Free-Roam/Role Event Schedule
 
-A basic webpage that shows the daily RDR2 online event timetable, and the next upcoming events. All times are in your local time zone (British Summer Time), according to your device's locale settings. Oh and it has a light/dark theme switcher too.
+A basic webpage that shows the daily RDR2 online event timetable, and the next upcoming events. All times are in your local time zone (e.g. British Summer Time), according to your device's locale settings. Oh and it has a light/dark theme switcher too.
 
 ## Installation
 
