@@ -257,7 +257,7 @@ li:hover .form-link,
   opacity: 1;
 }
 
-li.next-event {
+.schedule li.next-event {
   font-weight: bold;
   background: var(--next-event-background);
 }
